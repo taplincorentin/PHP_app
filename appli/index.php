@@ -9,7 +9,8 @@
     <body>
 
         <h1>Add a new product</h1>
-        <form action="processing.php" method="post">
+        <form action="processing.php" method="post"> <!--form action gives target file when form submitted
+                                                            method gives HTTP method that will be used to transmit form to server -->
             <p>
                 <label>
                     Product name :
