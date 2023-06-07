@@ -23,5 +23,22 @@
         }
     }
 
+    if(isset($_GET['action'])){
+        for($i=0;$i<count($_SESSION['products']);$i++){
+
+            switch($_GET['action']){
+                case "'delete".$i."'":
+                    unset($_SESSION['products'][$i]);
+                    break;
+            }
+        }
+
+            switch($_GET['action']){
+                case "clear":
+                    unset($_SESSION['products']);
+                    break;
+        }
+    }
+
     header("Location:index.php");
 ?>

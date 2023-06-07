@@ -12,7 +12,8 @@
         <title>Products recap</title>
 </head>
 <body class="border border-primary border-4">
-    <nav>
+    <div>    
+        <nav>
         <button class="text-primary btn dropdown-toggle" type="button" data-bs-toggle="dropdown"> 
             MENU 
         </button>
@@ -21,6 +22,9 @@
             <li><a class="dropdown-item text-primary" href="recap.php">Recap</a></li>
         </ul>
     </nav>
+    
+        <button class='btn text-primary'><a href='processing.php?action=clear'>Empty</a></button>
+    </div>
     <h1 class ="text-center text-primary">RECAP</h1>
     <?php 
         //if 'products' key doesn't exist or null, display message
@@ -36,6 +40,7 @@
                             "<th>Price</th>",
                             "<th>Quantity</th>",
                             "<th>Total</th>",
+                            "<th>Delete</th>",
                         "</tr>",
                     "</thead>",
                     "<tbody>";
@@ -48,6 +53,7 @@
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                         "<td>".$product['quant']."</td>",
                         "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                        "<td><button name ='button".$index."'type='button' class='btn btn-primary btn-sm' ><a href='processing.php?action=delete".$index."'></a></button></td>",
                     "</tr>";
                 $totalGeneral+=$product['total'];
             }
@@ -58,7 +64,16 @@
                 "</tbody>",
                 "</table>";
         }
-        echo "<p class='text-end text-primary'>Number of different products : ".count($_SESSION['products'])."</p>";
+        
+
+        //checking if there are any products before showing how many there are
+        if (!empty($_SESSION['products'])){
+            echo "<p class='text-end text-primary'>Number of different products : ".count($_SESSION['products'])."</p>";
+        } else {
+            echo "<p class='text-end text-primary'>Number of different products : 0</p>";
+        }
+
+        
     ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
