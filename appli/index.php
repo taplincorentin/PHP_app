@@ -7,18 +7,18 @@
         <link rel="stylesheet" href="css/style.css">
         <title>Product adding</title>
     </head>
-    <body>
+    <body class="border border-primary border-4">
         <nav>
-            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"> 
+            <button class="text-primary btn dropdown-toggle" type="button" data-bs-toggle="dropdown"> 
                 MENU 
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="index.php">Add new product</a></li>
-                <li><a class="dropdown-item" href="recap.php">Recap</a></li>
+                <li><a class="dropdown-item text-primary" href="index.php">Add new product</a></li>
+                <li><a class="dropdown-item text-primary" href="recap.php">Recap</a></li>
             </ul>
         </nav>
-        <h1 class ="text-center">Add a new product</h1>
-        <form action="processing.php" method="post" class ="text-center"> <!--form action gives target file when form submitted
+        <h1 class ="text-center text-primary">ADD A NEW PRODUCT</h1>
+        <form action="processing.php" method="post" class ="text-center text-primary"> <!--form action gives target file when form submitted
                                                             method gives HTTP method that will be used to transmit form to server -->
             <p>
                 <label>
@@ -42,6 +42,10 @@
                 <input type='submit' name='submit' value="Add the product" class="btn btn-primary">
             </p>
         </form>
+        <?php
+            session_start();
+            echo "<p class='text-end text-primary'>Number of different products : ".count($_SESSION['products'])."</p>";
+        ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -11,23 +11,24 @@
         
         <title>Products recap</title>
 </head>
-<body>
+<body class="border border-primary border-4">
     <nav>
-        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"> 
+        <button class="text-primary btn dropdown-toggle" type="button" data-bs-toggle="dropdown"> 
             MENU 
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="index.php">Add new product</a></li>
-            <li><a class="dropdown-item" href="recap.php">Recap</a></li>
+            <li><a class="dropdown-item text-primary" href="index.php">Add new product</a></li>
+            <li><a class="dropdown-item text-primary" href="recap.php">Recap</a></li>
         </ul>
     </nav>
+    <h1 class ="text-center text-primary">RECAP</h1>
     <?php 
-        //si la clé 'products' n'existe pas ou est nulle affichage d'un message
+        //if 'products' key doesn't exist or null, display message
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
-            echo "<p>Aucun produit en session...</p>";
+            echo "<p class='text-primary text-center'>Nothing has been added</p>";
         }
         else{
-            echo "<table>",
+            echo "<table class='table text-primary text-center'>",
                     "<thead>",
                         "<tr>",
                             "<th>#</th>",
@@ -57,6 +58,7 @@
                 "</tbody>",
                 "</table>";
         }
+        echo "<p class='text-end text-primary'>Number of different products : ".count($_SESSION['products'])."</p>";
     ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
