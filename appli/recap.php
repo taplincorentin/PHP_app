@@ -23,16 +23,16 @@
         </ul>
     </nav>
     
-        <button class='btn text-primary'><a href='processing.php?action=clear'>Empty</a></button>
+        <button class='btn text-primary'><a href='processing.php?action=clear'>EMPTY</a></button>
     </div>
     <h1 class ="text-center text-primary">RECAP</h1>
     <?php 
         //if 'products' key doesn't exist or null, display message
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
-            echo "<p class='text-primary text-center'>Nothing has been added</p>";
+            echo "<p class='text-primary text-center'>NO PRODUCTS</p>";
         }
         else{
-            echo "<table class='table text-primary text-center'>",
+            echo "<table class='table text-primary text-center fs-3'>",
                     "<thead>",
                         "<tr>",
                             "<th>#</th>",
@@ -40,7 +40,7 @@
                             "<th>Price</th>",
                             "<th>Quantity</th>",
                             "<th>Total</th>",
-                            "<th>Delete</th>",
+                            "<th></th>",   
                         "</tr>",
                     "</thead>",
                     "<tbody>";
@@ -51,9 +51,12 @@
                         "<td>".$index."</th>",
                         "<td>".$product['name']."</td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td>".$product['quant']."</td>",
+                        "<td><a href='processing.php?action=minusOne&id=$index' class='btn btn-primary btn-sm'> - </a>"
+                            .$product['quant'].
+                            "<a href='processing.php?action=plusOne&id=$index' class='btn btn-primary btn-sm'>+</a></td>",
                         "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td><button name ='button".$index."'type='button' class='btn btn-primary btn-sm' ><a href='processing.php?action=delete".$index."'></a></button></td>",
+                        "<td><a href='processing.php?action=delete&id=$index' class='btn btn-danger btn-sm'>x</a></td>",
+                        
                     "</tr>";
                 $totalGeneral+=$product['total'];
             }

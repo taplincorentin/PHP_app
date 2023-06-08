@@ -24,21 +24,40 @@
     }
 
     if(isset($_GET['action'])){
-        for($i=0;$i<count($_SESSION['products']);$i++){
+        switch($_GET['action']){
+            case "delete":
+                if(isset($_GET['id']) && isset($_SESSION['products'][$_GET['id']])){
+                    unset($_SESSION['products'][$_GET['id']]);
+                    
+                    header("Location: recap.php");
+                    die();
+                }
 
-            switch($_GET['action']){
-                case "'delete".$i."'":
-                    unset($_SESSION['products'][$i]);
-                    break;
-            }
-        }
-
-            switch($_GET['action']){
-                case "clear":
-                    unset($_SESSION['products']);
-                    break;
+            case "clear":
+                unset($_SESSION['products']);
+                break;
+            
+            case "plusOne":
+                $_SESSION['products'][$_GET['id']]['quant']++;
+                //calc new total
+                $_SESSION['products'][$_GET['id']]['total']=$_SESSION['products'][$_GET['id']]['price']*$_SESSION['products'][$_GET['id']]['quant'];
+                header("Location: recap.php");
+                die();
+                
+            case "minusOne":
+                if($_SESSION['products'][$_GET['id']]['quant']==1){
+                    header("Location: recap.php");
+                    die();
+                }
+                else {
+                    $_SESSION['products'][$_GET['id']]['quant']--;
+                    $_SESSION['products'][$_GET['id']]['total']=$_SESSION['products'][$_GET['id']]['price']*$_SESSION['products'][$_GET['id']]['quant'];
+                    header("Location: recap.php");
+                    die();
+                }
         }
     }
+    
 
     header("Location:index.php");
 ?>
