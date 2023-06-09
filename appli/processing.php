@@ -20,6 +20,8 @@
             ];
 
             $_SESSION['products'][] = $product;
+            $_SESSION['message'] = "<p class='text-primary'>".$name." added to cart</p>";
+            
         }
     }
 
