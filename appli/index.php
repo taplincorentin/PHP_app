@@ -4,32 +4,26 @@ ob_start()
 
 
 ?>
-        <h1 class ="text-center text-primary">ADD A NEW PRODUCT</h1>
-        <form action="processing.php" method="post" class ="text-center text-primary"> <!--form action gives target file when form submitted
-                                                            method gives HTTP method that will be used to transmit form to server -->
-            <p>
-                <label>
-                    Product name :
-                    <input type='text' name='name'>
-                </label>
+        <h1 class='text-center'>ADD A NEW PRODUCT</h1>
+        <form action="processing.php" method="post" class> <!--form action gives target file when form submitted
+                                                               method gives HTTP method that will be used to transmit form to server -->
+            <div> 
+            <p  class="form-group">
+                <label>Product name :</label>
+                <input type='text' name='name' class="form-control">
+            </p>
+            <p  class="form-group">
+                <label>Product price :</label>
+                <input step='any' name='price' class="form-control">    
+            </p>
+            <p class="form-group">
+                <label>Desired quantity :</label>
+                <input name='quant' value='1' class="form-control">
             </p>
             <p>
-                <label>
-                    Product price :
-                    <input type='number' step='any' name='price'>
-                </label>
+                <input type='submit' name='submit' value="Add the product" class="btn btn-dark">
             </p>
-
-            
-            <p>
-                <label>
-                    Desired quantity :
-                    <input type='number' name='quant' value='1'>
-                </label>
-            </p>
-            <p>
-                <input type='submit' name='submit' value="Add the product" class="btn btn-primary">
-            </p>
+            </div>
         </form>
 
 

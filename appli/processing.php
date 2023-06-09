@@ -20,40 +20,54 @@
             ];
 
             $_SESSION['products'][] = $product;
-            $_SESSION['message'] = "<p class='text-primary'>".$name." added to cart</p>";
-            
+            $_SESSION['message'] = $name." added to cart";
+        
+        }
+        else {
+            $_SESSION['message'] = "! Wrong input ! Not added to cart";
         }
     }
 
     if(isset($_GET['action'])){
         switch($_GET['action']){
             case "delete":
-                if(isset($_GET['id']) && isset($_SESSION['products'][$_GET['id']])){
-                    unset($_SESSION['products'][$_GET['id']]);
-                    
+                if(isset($id) && isset($_SESSION['products'][$id])){
+                    $name1=$_SESSION['products'][$id]['name'];
+                    unset($_SESSION['products'][$id]);
+                    $_SESSION['message'] = $name1." removed from cart";
                     header("Location: recap.php");
                     die();
                 }
 
             case "clear":
                 unset($_SESSION['products']);
-                break;
+                $_SESSION['message'] = "Cart emptied";
+                header("Location:index.php");
+                die();
             
             case "plusOne":
-                $_SESSION['products'][$_GET['id']]['quant']++;
+                $name1=$_SESSION['products'][$id]['name'];
+                $_SESSION['products'][$id]['quant']++;
                 //calc new total
-                $_SESSION['products'][$_GET['id']]['total']+=$_SESSION['products'][$_GET['id']]['price'];
+                $_SESSION['products'][$id]['total']+=$_SESSION['products'][$id]['price'];
+                
+                $_SESSION['message'] = "plus one ".$name1;
+                
                 header("Location: recap.php");
                 die();
                 
             case "minusOne":
-                if($_SESSION['products'][$_GET['id']]['quant']==1){
+                if($_SESSION['products'][$id]['quant']==1){
                     header("Location: recap.php");
                     die();
                 }
                 else {
-                    $_SESSION['products'][$_GET['id']]['quant']--;
-                    $_SESSION['products'][$_GET['id']]['total']=$_SESSION['products'][$_GET['id']]['price']*$_SESSION['products'][$_GET['id']]['quant'];
+                    $name1=$_SESSION['products'][$id]['name'];
+                    $_SESSION['products'][$id]['quant']--;
+                    $_SESSION['products'][$id]['total']-=$_SESSION['products'][$id]['price'];
+                    
+                    $_SESSION['message'] = "minus one ".$name1;
+                    
                     header("Location: recap.php");
                     die();
                 }
@@ -61,5 +75,5 @@
     }
     
 
-    header("Location:index.php");
+    
 ?>

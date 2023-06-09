@@ -1,19 +1,18 @@
 <?php
 
-    ob_start()
+    ob_start();
     
-    ?>
-    <button class='btn text-primary'><a href='processing.php?action=clear'>EMPTY</a></button>
-    <h1 class ="text-center text-primary">RECAP</h1>
-    
-    <?php
-        session_start(); 
+ 
+        session_start();
+        echo "<h1 class='text-center'>CART</h1>";
+     
         //if 'products' key doesn't exist or null, display message
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
-            echo "<p class='text-primary text-center'>NO PRODUCTS</p>";
+            echo "<p class='text-center'>NO PRODUCTS</p>";
         }
         else{
-            echo "<table class='table text-primary text-center fs-3'>",
+            echo '<a class="float-end text-reset" href="processing.php?action=clear"><i class="fa-regular fa-trash-can"></i>EMPTY</a>';
+            echo "<table class='table text-center fs-3'>",
                     "<thead>",
                         "<tr>",
                             "<th>#</th>",
@@ -32,9 +31,9 @@
                         "<td>".$index."</th>",
                         "<td>".$product['name']."</td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td><a href='processing.php?action=minusOne&id=$index' class='btn btn-primary btn-sm'> - </a>"
+                        "<td><a href='processing.php?action=minusOne&id=$index' class='btn btn-dark btn-sm'> - </a>"
                             .$product['quant'].
-                            "<a href='processing.php?action=plusOne&id=$index' class='btn btn-primary btn-sm'>+</a></td>",
+                            "<a href='processing.php?action=plusOne&id=$index' class='btn btn-dark btn-sm'>+</a></td>",
                         "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                         "<td><a href='processing.php?action=delete&id=$index' class='btn btn-danger btn-sm'>x</a></td>",
                         
