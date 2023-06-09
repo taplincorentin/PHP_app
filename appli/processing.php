@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    $id = (isset($_GET['id'])) ? $_GET['id'] : null;
     if(isset($_POST['submit'])){
         //filter_input() validates or "cleans" transmitted variables
         
@@ -42,7 +42,7 @@
             case "plusOne":
                 $_SESSION['products'][$_GET['id']]['quant']++;
                 //calc new total
-                $_SESSION['products'][$_GET['id']]['total']=$_SESSION['products'][$_GET['id']]['price']*$_SESSION['products'][$_GET['id']]['quant'];
+                $_SESSION['products'][$_GET['id']]['total']+=$_SESSION['products'][$_GET['id']]['price'];
                 header("Location: recap.php");
                 die();
                 
