@@ -11,7 +11,6 @@
             echo "<p class='text-center'>NO PRODUCTS</p>";
         }
         else{
-            echo '<a class="float-end text-reset" href="processing.php?action=clear"><i class="fa-regular fa-trash-can"></i>EMPTY</a>';
             echo "<table class='table text-center fs-3'>",
                     "<thead>",
                         "<tr>",
@@ -28,8 +27,23 @@
             $totalGeneral = 0;
             foreach($_SESSION['products'] as $index => $product){
                 echo "<tr>",
-                        "<td>".$index."</th>",
-                        "<td>".$product['name']."</td>",
+                        "<td>".$index."</td>",
+                        "<td><button type='button' data-bs-toggle='modal' data-bs-target='#myModal-$index'>"
+                        .$product['name']."</button>
+                        <div id='myModal-$index' class='modal fade' aria-labelledby='myModal' aria-hidden='true'>
+                            <div class='modal-dialog'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <h1>Info</h1>
+                                    </div>
+                                    <div class='modal-body'>
+                                    <img src='./pictures/".$product['fileName']."'width='200px'>
+                                    <p>".$product['text']."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </td>",
                         "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                         "<td><a href='processing.php?action=minusOne&id=$index' class='btn btn-dark btn-sm'> - </a>"
                             .$product['quant'].
@@ -46,6 +60,8 @@
                 "</tr>",
                 "</tbody>",
                 "</table>";
+        
+                echo '<a class="btn btn-danger" href="processing.php?action=clear"><i class="fa-regular fa-trash-can"></i>EMPTY</a>';
         }
         
 

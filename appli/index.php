@@ -4,7 +4,7 @@ ob_start()
 
 
 ?>
-        <h1 class='text-center'>ADD A NEW PRODUCT</h1>
+       <h1 class='text-center'>ADD A NEW PRODUCT</h1>
         <form action="processing.php" method="post" enctype='multipart/form-data'> <!--form action gives target file when form submitted
                                                                method gives HTTP method that will be used to transmit form to server -->
             <div> 
@@ -21,7 +21,12 @@ ob_start()
                 <input name='quant' value='1' class="form-control">
             </p>
             <p class='form-group'>
+            <label>Picture :</label>
                 <input type="file" name="file" class="form-control">
+            </p>
+            <p class="form-group">
+                <label>Description :</label>
+                <textarea name = 'text' placeholder="describe the product" class="form-control"></textarea>
             </p>
             <p>
                 <input type='submit' name='submit' value="Add the product" class="btn btn-dark">
