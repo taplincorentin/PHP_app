@@ -2,12 +2,18 @@
     session_start();
     $id = (isset($_GET['id'])) ? $_GET['id'] : null;
     if(isset($_POST['submit'])){
-        //filter_input() validates or "cleans" transmitted variables
         
+        //filter_input() validates or "cleans" transmitted variables
         $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $quant = filter_input(INPUT_POST, "quant", FILTER_VALIDATE_INT);    
+        $quant = filter_input(INPUT_POST, "quant", FILTER_VALIDATE_INT);
+        $tmpName = $_FILES['file']['tmp_name'];
         //if filter fails it returns false or null
+
+        //giving unique name to file
+        $fileName  = uniqid("", true);
+        
+        move_uploaded_file($tmpName, './upload/'.$fileName);
 
         //checking there are no null or false value after filter
         if($name && $price && $quant){
@@ -16,7 +22,8 @@
                 "name" => $name,
                 "price" => $price,
                 "quant" => $quant,
-                "total" => $price*$quant
+                "total" => $price*$quant,
+                "fileName" => $fileName
             ];
 
             $_SESSION['products'][] = $product;
