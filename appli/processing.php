@@ -4,7 +4,7 @@
     if(isset($_POST['submit'])){
         //filter_input() validates or "cleans" transmitted variables
         
-        $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $quant = filter_input(INPUT_POST, "quant", FILTER_VALIDATE_INT);    
         //if filter fails it returns false or null
@@ -26,6 +26,7 @@
         else {
             $_SESSION['message'] = "! Wrong input ! Not added to cart";
         }
+        header("Location: recap.php");
     }
 
     if(isset($_GET['action'])){
